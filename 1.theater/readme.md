@@ -38,4 +38,6 @@
 
 #### ポイント集計変数の削除
 
-- Step1&2: `ループの分離`と`ステートメントのスライド`
+- Step1&2: [`ループの分離`と`ステートメントのスライド`](https://github.com/jinyongnan810/refactoring/commit/9c42ffe3c614b3f78a6f1f30d5e1a4c920c32bfa#diff-dd9e87fcdc315898d854026f42e7454b873ba7446e84c7b01f534e38229ef7ae)
+- Step3&4: `関数の抽出`と`変数のインライン化`
+- ループ分離でパフォーマンスへの影響は実際のところ要検討

@@ -45,6 +45,14 @@ export const statement = (invoice: Invoice, plays: Play) => {
       minimumFractionDigits: 2,
     }).format(aAmount / 100);
   };
+  // 総ポイント集計
+  const totalVolumeCredits = () => {
+    let result = 0;
+    for (let aPerformance of invoice.performances) {
+      result += volumeCreditsFor(aPerformance);
+    }
+    return result;
+  };
   let totalAmount = 0;
   let result = `Statement for ${invoice.customer}\n`;
   for (let perf of invoice.performances) {
@@ -57,11 +65,8 @@ export const statement = (invoice: Invoice, plays: Play) => {
     totalAmount += thisAmount;
     // Point加算
   }
-  let volumeCredits = 0;
-  for (let perf of invoice.performances) {
-    volumeCredits += volumeCreditsFor(perf);
-  }
+
   result += `Amount owed is ${usd(totalAmount)}\n`;
-  result += `You earned ${volumeCredits} credits\n`;
+  result += `You earned ${totalVolumeCredits()} credits\n`;
   return result;
 };
