@@ -27,6 +27,16 @@ export const statement = (invoice: Invoice, plays: Play) => {
     }
     return result;
   };
+  // Point計算ロジック
+  const volumeCreditsFor = (aPerformance: Perfomance) => {
+    // ボリューム得点のポイントを加算
+    let result = 0;
+    result += Math.max(aPerformance.audience - 30, 0);
+    // 喜劇のときは10人につき、さらにポイントを加算
+    if ("comedy" === playFor(aPerformance).type)
+      result += Math.floor(aPerformance.audience / 5);
+    return result;
+  };
   let totalAmount = 0;
   let volumeCredits = 0;
   let result = `Statement for ${invoice.customer}\n`;
@@ -37,17 +47,14 @@ export const statement = (invoice: Invoice, plays: Play) => {
   }).format;
   for (let perf of invoice.performances) {
     let thisAmount = amountFor(perf);
-
-    // ボリューム得点のポイントを加算
-    volumeCredits += Math.max(perf.audience - 30, 0);
-    // 喜劇のときは10人につき、さらにポイントを加算
-    if ("comedy" === playFor(perf).type)
-      volumeCredits += Math.floor(perf.audience / 5);
     // 注文の内訳を出力
     result += `  ${playFor(perf).name}: ${format(thisAmount / 100)} (${
       perf.audience
     } seats)\n`;
+    // 金額加算
     totalAmount += thisAmount;
+    // Point加算
+    volumeCredits += volumeCreditsFor(perf);
   }
   result += `Amount owed is ${format(totalAmount / 100)}\n`;
   result += `You earned ${volumeCredits} credits\n`;

@@ -26,4 +26,10 @@
 - 目的：一時変数を削除し、ローカルスコープの変数量を減らす
 - Step 1:[間に合わせによる一時変数の置き換え](https://github.com/jinyongnan810/refactoring/commit/d78fe96d421913474b24f2b53af18eca7db2f9f6#diff-dd9e87fcdc315898d854026f42e7454b873ba7446e84c7b01f534e38229ef7ae)
 - [間違えを fix](https://github.com/jinyongnan810/refactoring/commit/4cdda5376fe08f4f3ccd31b2c96f998d37eeaa02#diff-dd9e87fcdc315898d854026f42e7454b873ba7446e84c7b01f534e38229ef7ae)
-- Step 2:変数のインライン化
+- Step 2:[変数のインライン化](https://github.com/jinyongnan810/refactoring/commit/8b29d090a2fb481bd408f9fe8de73cb23aecadba) (thisAmount の削除もあったが、個人的に過剰だと思ってスキップ)
+
+#### ポイント計算ロジックの抽出
+
+##### ロジック抽出
+
+- 一旦ロジックそのまま抽出、抽出中身の変数名を分かりやすくする
