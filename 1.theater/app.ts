@@ -6,9 +6,9 @@ export const statement = (invoice: Invoice, plays: Play) => {
     return plays[aPerformance.playID];
   };
   // 金額計算ロジック
-  const amountFor = (aPerformance: Perfomance, play: SinglePlay) => {
+  const amountFor = (aPerformance: Perfomance) => {
     let result = 0;
-    switch (play.type) {
+    switch (playFor(aPerformance).type) {
       case "tragedy":
         result = 40000;
         if (aPerformance.audience > 30) {
@@ -23,7 +23,7 @@ export const statement = (invoice: Invoice, plays: Play) => {
         result += 300 * aPerformance.audience;
         break;
       default:
-        throw new Error(`Unknown type:${play.type}`);
+        throw new Error(`Unknown type:${playFor(aPerformance).type}`);
     }
     return result;
   };
@@ -36,15 +36,15 @@ export const statement = (invoice: Invoice, plays: Play) => {
     minimumFractionDigits: 2,
   }).format;
   for (let perf of invoice.performances) {
-    const play = playFor(perf);
-    let thisAmount = amountFor(perf, play);
+    let thisAmount = amountFor(perf);
 
     // ボリューム得点のポイントを加算
     volumeCredits += Math.max(perf.audience - 30, 0);
     // 喜劇のときは10人につき、さらにポイントを加算
-    if ("comedy" === play.type) volumeCredits += Math.floor(perf.audience / 5);
+    if ("comedy" === playFor(perf).type)
+      volumeCredits += Math.floor(perf.audience / 5);
     // 注文の内訳を出力
-    result += `  ${play.name}: ${format(thisAmount / 100)} (${
+    result += `  ${playFor(perf).name}: ${format(thisAmount / 100)} (${
       perf.audience
     } seats)\n`;
     totalAmount += thisAmount;
