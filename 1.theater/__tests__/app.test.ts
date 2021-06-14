@@ -1,5 +1,15 @@
-describe("test1", () => {
-  test("1+1=2", () => {
-    expect(1 + 1).toEqual(2);
+import { statement } from "../app";
+import { invoiceData, playData } from "../data";
+describe("theater", function () {
+  test("normal", function () {
+    const result = statement(invoiceData[0], playData);
+    const expected = `Statement for BigCo
+  Hamlet: $650.00 (55 seats)
+  As You Like It: $580.00 (35 seats)
+  Othello: $500.00 (40 seats)
+Amount owed is $1,730.00
+You earned 47 credits
+`;
+    expect(result).toEqual(expected);
   });
 });
