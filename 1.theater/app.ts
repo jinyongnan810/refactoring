@@ -53,20 +53,24 @@ export const statement = (invoice: Invoice, plays: Play) => {
     }
     return result;
   };
-  let totalAmount = 0;
-  let result = `Statement for ${invoice.customer}\n`;
-  for (let perf of invoice.performances) {
-    let thisAmount = amountFor(perf);
-    // 注文の内訳を出力
-    result += `  ${playFor(perf).name}: ${usd(thisAmount)} (${
-      perf.audience
-    } seats)\n`;
-    // 金額加算
-    totalAmount += thisAmount;
-    // Point加算
-  }
+  // 総金額集計
+  const totalAmount = () => {
+    let totalAmount = 0;
+    for (let perf of invoice.performances) {
+      let thisAmount = amountFor(perf);
+      // 注文の内訳を出力
+      result += `  ${playFor(perf).name}: ${usd(thisAmount)} (${
+        perf.audience
+      } seats)\n`;
+      // 金額加算
+      totalAmount += thisAmount;
+    }
+    return totalAmount;
+  };
 
-  result += `Amount owed is ${usd(totalAmount)}\n`;
+  let result = `Statement for ${invoice.customer}\n`;
+  let amount = totalAmount();
+  result += `Amount owed is ${usd(amount)}\n`;
   result += `You earned ${totalVolumeCredits()} credits\n`;
   return result;
 };
