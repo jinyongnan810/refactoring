@@ -37,18 +37,21 @@ export const statement = (invoice: Invoice, plays: Play) => {
       result += Math.floor(aPerformance.audience / 5);
     return result;
   };
+  // 金額フォーマットロジック
+  const usd = (aAmount: number) => {
+    return new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      minimumFractionDigits: 2,
+    }).format(aAmount / 100);
+  };
   let totalAmount = 0;
   let volumeCredits = 0;
   let result = `Statement for ${invoice.customer}\n`;
-  const format = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    minimumFractionDigits: 2,
-  }).format;
   for (let perf of invoice.performances) {
     let thisAmount = amountFor(perf);
     // 注文の内訳を出力
-    result += `  ${playFor(perf).name}: ${format(thisAmount / 100)} (${
+    result += `  ${playFor(perf).name}: ${usd(thisAmount)} (${
       perf.audience
     } seats)\n`;
     // 金額加算
@@ -56,7 +59,7 @@ export const statement = (invoice: Invoice, plays: Play) => {
     // Point加算
     volumeCredits += volumeCreditsFor(perf);
   }
-  result += `Amount owed is ${format(totalAmount / 100)}\n`;
+  result += `Amount owed is ${usd(totalAmount)}\n`;
   result += `You earned ${volumeCredits} credits\n`;
   return result;
 };
