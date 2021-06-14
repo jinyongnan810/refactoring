@@ -24,6 +24,10 @@ const amountFor = (aPerformance: Perfomance, play: SinglePlay) => {
 };
 
 export const statement = (invoice: Invoice, plays: Play) => {
+  // play取得
+  const playFor = (aPerformance: Perfomance) => {
+    return plays[aPerformance.playID];
+  };
   let totalAmount = 0;
   let volumeCredits = 0;
   let result = `Statement for ${invoice.customer}\n`;
@@ -33,7 +37,7 @@ export const statement = (invoice: Invoice, plays: Play) => {
     minimumFractionDigits: 2,
   }).format;
   for (let perf of invoice.performances) {
-    const play = plays[perf.playID];
+    const play = playFor(perf);
     let thisAmount = amountFor(perf, play);
 
     // ボリューム得点のポイントを加算
