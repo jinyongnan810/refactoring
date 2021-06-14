@@ -32,6 +32,10 @@
 
 - [ロジックそのまま抽出、抽出中身の変数名を分かりやすくする](https://github.com/jinyongnan810/refactoring/commit/3844195d4dc232c7acb1f8cbfc48a22067bb30ee)
 
-#### 金額フォーマットロジックの抽出
+#### [金額フォーマットロジックの抽出](https://github.com/jinyongnan810/refactoring/commit/8ef4740efaf028006aff2362d617931a2de0f31a#diff-dd9e87fcdc315898d854026f42e7454b873ba7446e84c7b01f534e38229ef7ae)
 
 - 関数名を一目で分かるように`usd`と名づける
+
+#### ポイント集計変数の削除
+
+- Step1&2: `ループの分離`と`ステートメントのスライド`

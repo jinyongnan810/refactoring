@@ -46,7 +46,6 @@ export const statement = (invoice: Invoice, plays: Play) => {
     }).format(aAmount / 100);
   };
   let totalAmount = 0;
-  let volumeCredits = 0;
   let result = `Statement for ${invoice.customer}\n`;
   for (let perf of invoice.performances) {
     let thisAmount = amountFor(perf);
@@ -57,6 +56,9 @@ export const statement = (invoice: Invoice, plays: Play) => {
     // 金額加算
     totalAmount += thisAmount;
     // Point加算
+  }
+  let volumeCredits = 0;
+  for (let perf of invoice.performances) {
     volumeCredits += volumeCreditsFor(perf);
   }
   result += `Amount owed is ${usd(totalAmount)}\n`;
