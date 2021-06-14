@@ -1,4 +1,27 @@
-import { Invoice, Play } from "./typings";
+import { Invoice, Perfomance, Play, SinglePlay } from "./typings";
+
+// 金額計算ロジック
+const amountFor = (perf: Perfomance, play: SinglePlay) => {
+  let thisAmount = 0;
+  switch (play.type) {
+    case "tragedy":
+      thisAmount = 40000;
+      if (perf.audience > 30) {
+        thisAmount += 1000 * (perf.audience - 30);
+      }
+      break;
+    case "comedy":
+      thisAmount = 30000;
+      if (perf.audience > 20) {
+        thisAmount += 10000 + 500 * (perf.audience - 20);
+      }
+      thisAmount += 300 * perf.audience;
+      break;
+    default:
+      throw new Error(`Unknown type:${play.type}`);
+  }
+  return thisAmount;
+};
 
 export const statement = (invoice: Invoice, plays: Play) => {
   let totalAmount = 0;
@@ -11,24 +34,8 @@ export const statement = (invoice: Invoice, plays: Play) => {
   }).format;
   for (let perf of invoice.performances) {
     const play = plays[perf.playID];
-    let thisAmount = 0;
-    switch (play.type) {
-      case "tragedy":
-        thisAmount = 40000;
-        if (perf.audience > 30) {
-          thisAmount += 1000 * (perf.audience - 30);
-        }
-        break;
-      case "comedy":
-        thisAmount = 30000;
-        if (perf.audience > 20) {
-          thisAmount += 10000 + 500 * (perf.audience - 20);
-        }
-        thisAmount += 300 * perf.audience;
-        break;
-      default:
-        throw new Error(`Unknown type:${play.type}`);
-    }
+    let thisAmount = amountFor(perf, play);
+
     // ボリューム得点のポイントを加算
     volumeCredits += Math.max(perf.audience - 30, 0);
     // 喜劇のときは10人につき、さらにポイントを加算

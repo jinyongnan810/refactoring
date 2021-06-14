@@ -5,6 +5,10 @@ export type Play = {
     type: PlayType;
   };
 };
+export type SinglePlay = {
+  name: string;
+  type: PlayType;
+};
 export type Perfomance = {
   playID: string;
   audience: number;
