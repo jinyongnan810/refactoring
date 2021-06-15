@@ -70,4 +70,6 @@
 
 #### 計算ロジックを抽出
 
-- statement 関数から計算ロジック関数を抽出する
+- [statement 関数から計算ロジック関数を抽出する](https://github.com/jinyongnan810/refactoring/commit/90e6f0334deb6722eb4f0b0ca37c9a669f2b0a54)
+
+#### ファイルを分離する
