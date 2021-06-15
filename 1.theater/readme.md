@@ -66,4 +66,8 @@
 - [customer 情報を出力ロジック用のデータに入れる](https://github.com/jinyongnan810/refactoring/commit/edc1ac5397f1406f1f75dbec427c2406d7cbffe2)
 - [performance 情報と play 情報を出力ロジック用のデータに入れる](https://github.com/jinyongnan810/refactoring/commit/61798e93c3075b718b6985d822a79c9c6534f066)
 - [金額とポイント計算を performance 情報に入れ、総計を出力ロジック用のデータに入れる](https://github.com/jinyongnan810/refactoring/commit/3e8977f76d580448e3ace4ec17c957e135c797ba)
-- パイプラインによるループの置き換え
+- [パイプラインによるループの置き換え](https://github.com/jinyongnan810/refactoring/commit/cab3f389969dffd82192603651e75863a335fa25)
+
+#### 計算ロジックを抽出
+
+- statement 関数から計算ロジック関数を抽出する

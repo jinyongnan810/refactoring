@@ -8,6 +8,9 @@ import {
 } from "./typings";
 
 export const statement = (invoice: Invoice, plays: Play) => {
+  return renderPlainText(createStatementData(invoice, plays));
+};
+export const createStatementData = (invoice: Invoice, plays: Play) => {
   // play取得
   const playFor = (aPerformance: Perfomance) => {
     return plays[aPerformance.playID];
@@ -77,14 +80,9 @@ export const statement = (invoice: Invoice, plays: Play) => {
   };
   statementData.totalAmount = totalAmount(statementData);
   statementData.totalVolumeCredits = totalVolumeCredits(statementData);
-  return renderPlainText(statementData, invoice, plays);
+  return statementData;
 };
-
-export const renderPlainText = (
-  data: StatementData,
-  invoice: Invoice,
-  plays: Play
-) => {
+export const renderPlainText = (data: StatementData) => {
   // 金額フォーマットロジック
   const usd = (aAmount: number) => {
     return new Intl.NumberFormat("en-US", {
