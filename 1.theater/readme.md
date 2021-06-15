@@ -65,4 +65,5 @@
 - [まずは空のオブジェクトからスタート](https://github.com/jinyongnan810/refactoring/commit/8d47abec6dcd3f6ffbc0767649e4aab2b805c13a)
 - [customer 情報を出力ロジック用のデータに入れる](https://github.com/jinyongnan810/refactoring/commit/edc1ac5397f1406f1f75dbec427c2406d7cbffe2)
 - [performance 情報と play 情報を出力ロジック用のデータに入れる](https://github.com/jinyongnan810/refactoring/commit/61798e93c3075b718b6985d822a79c9c6534f066)
-- 金額とポイント計算を performance 情報に入れ、総計を出力ロジック用のデータに入れる
+- [金額とポイント計算を performance 情報に入れ、総計を出力ロジック用のデータに入れる](https://github.com/jinyongnan810/refactoring/commit/3e8977f76d580448e3ace4ec17c957e135c797ba)
+- パイプラインによるループの置き換え

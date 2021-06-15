@@ -46,20 +46,17 @@ export const statement = (invoice: Invoice, plays: Play) => {
   };
   // 総ポイント集計
   const totalVolumeCredits = (data: StatementData) => {
-    let result = 0;
-    for (let aPerformance of data.performances) {
-      result += aPerformance.volumeCredits;
-    }
-    return result;
+    return data.performances.reduce(
+      (total, aPerformance) => aPerformance.volumeCredits + total,
+      0
+    );
   };
   // 総金額集計
   const totalAmount = (data: StatementData) => {
-    let totalAmount = 0;
-    for (let perf of data.performances) {
-      // 金額加算
-      totalAmount += perf.amount;
-    }
-    return totalAmount;
+    return data.performances.reduce(
+      (total, aPerformance) => aPerformance.amount + total,
+      0
+    );
   };
 
   const statementData: StatementData = {
@@ -99,11 +96,11 @@ export const renderPlainText = (
 
   let result = `Statement for ${data.customer}\n`;
   // 注文の内訳を出力
-  for (const aPerformance of data.performances) {
+  data.performances.forEach((aPerformance) => {
     result += `  ${aPerformance.play.name}: ${usd(aPerformance.amount)} (${
       aPerformance.audience
     } seats)\n`;
-  }
+  });
   result += `Amount owed is ${usd(data.totalAmount)}\n`;
   result += `You earned ${data.totalVolumeCredits} credits\n`;
   return result;
