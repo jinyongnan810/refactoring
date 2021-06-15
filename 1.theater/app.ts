@@ -1,10 +1,15 @@
 import { Invoice, Perfomance, Play, SinglePlay } from "./typings";
 
 export const statement = (invoice: Invoice, plays: Play) => {
-  return renderPlainText(invoice, plays);
+  const statementData = {};
+  return renderPlainText(statementData, invoice, plays);
 };
 
-export const renderPlainText = (invoice: Invoice, plays: Play) => {
+export const renderPlainText = (
+  data: Object,
+  invoice: Invoice,
+  plays: Play
+) => {
   // play取得
   const playFor = (aPerformance: Perfomance) => {
     return plays[aPerformance.playID];
