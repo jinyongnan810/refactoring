@@ -1,4 +1,5 @@
 import {
+  EnrichedPerformance,
   Invoice,
   Perfomance,
   Play,
@@ -7,8 +8,19 @@ import {
 } from "./typings";
 
 export const statement = (invoice: Invoice, plays: Play) => {
+  // play取得
+  const playFor = (aPerformance: Perfomance) => {
+    return plays[aPerformance.playID];
+  };
   const statementData: StatementData = {
     customer: invoice.customer,
+    performances: invoice.performances.map((aPerformance) => {
+      const result: EnrichedPerformance = {
+        ...aPerformance,
+        play: playFor(aPerformance),
+      };
+      return result;
+    }),
   };
   return renderPlainText(statementData, invoice, plays);
 };
@@ -18,14 +30,10 @@ export const renderPlainText = (
   invoice: Invoice,
   plays: Play
 ) => {
-  // play取得
-  const playFor = (aPerformance: Perfomance) => {
-    return plays[aPerformance.playID];
-  };
   // 金額計算ロジック
-  const amountFor = (aPerformance: Perfomance) => {
+  const amountFor = (aPerformance: EnrichedPerformance) => {
     let result = 0;
-    switch (playFor(aPerformance).type) {
+    switch (aPerformance.play.type) {
       case "tragedy":
         result = 40000;
         if (aPerformance.audience > 30) {
@@ -40,17 +48,17 @@ export const renderPlainText = (
         result += 300 * aPerformance.audience;
         break;
       default:
-        throw new Error(`Unknown type:${playFor(aPerformance).type}`);
+        throw new Error(`Unknown type:${aPerformance.play.type}`);
     }
     return result;
   };
   // Point計算ロジック
-  const volumeCreditsFor = (aPerformance: Perfomance) => {
+  const volumeCreditsFor = (aPerformance: EnrichedPerformance) => {
     // ボリューム得点のポイントを加算
     let result = 0;
     result += Math.max(aPerformance.audience - 30, 0);
     // 喜劇のときは10人につき、さらにポイントを加算
-    if ("comedy" === playFor(aPerformance).type)
+    if ("comedy" === aPerformance.play.type)
       result += Math.floor(aPerformance.audience / 5);
     return result;
   };
@@ -65,7 +73,7 @@ export const renderPlainText = (
   // 総ポイント集計
   const totalVolumeCredits = () => {
     let result = 0;
-    for (let aPerformance of invoice.performances) {
+    for (let aPerformance of data.performances) {
       result += volumeCreditsFor(aPerformance);
     }
     return result;
@@ -73,10 +81,10 @@ export const renderPlainText = (
   // 総金額集計
   const totalAmount = () => {
     let totalAmount = 0;
-    for (let perf of invoice.performances) {
+    for (let perf of data.performances) {
       let thisAmount = amountFor(perf);
       // 注文の内訳を出力
-      result += `  ${playFor(perf).name}: ${usd(thisAmount)} (${
+      result += `  ${perf.play.name}: ${usd(thisAmount)} (${
         perf.audience
       } seats)\n`;
       // 金額加算

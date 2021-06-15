@@ -63,4 +63,5 @@
 #### 出力ロジック用のデータ構造を作成する
 
 - [まずは空のオブジェクトからスタート](https://github.com/jinyongnan810/refactoring/commit/8d47abec6dcd3f6ffbc0767649e4aab2b805c13a)
-- customer 情報を出力ロジック用のデータに入れる
+- [customer 情報を出力ロジック用のデータに入れる](https://github.com/jinyongnan810/refactoring/commit/edc1ac5397f1406f1f75dbec427c2406d7cbffe2)
+- performance 情報と play 情報を出力ロジック用のデータに入れる
