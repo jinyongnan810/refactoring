@@ -1,12 +1,20 @@
-import { Invoice, Perfomance, Play, SinglePlay } from "./typings";
+import {
+  Invoice,
+  Perfomance,
+  Play,
+  SinglePlay,
+  StatementData,
+} from "./typings";
 
 export const statement = (invoice: Invoice, plays: Play) => {
-  const statementData = {};
+  const statementData: StatementData = {
+    customer: invoice.customer,
+  };
   return renderPlainText(statementData, invoice, plays);
 };
 
 export const renderPlainText = (
-  data: Object,
+  data: StatementData,
   invoice: Invoice,
   plays: Play
 ) => {
@@ -77,7 +85,7 @@ export const renderPlainText = (
     return totalAmount;
   };
 
-  let result = `Statement for ${invoice.customer}\n`;
+  let result = `Statement for ${data.customer}\n`;
   let amount = totalAmount();
   result += `Amount owed is ${usd(amount)}\n`;
   result += `You earned ${totalVolumeCredits()} credits\n`;

@@ -62,4 +62,5 @@
 
 #### 出力ロジック用のデータ構造を作成する
 
-- まずは空のオブジェクトからスタート
+- [まずは空のオブジェクトからスタート](https://github.com/jinyongnan810/refactoring/commit/8d47abec6dcd3f6ffbc0767649e4aab2b805c13a)
+- customer 情報を出力ロジック用のデータに入れる

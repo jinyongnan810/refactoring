@@ -17,3 +17,6 @@ export type Invoice = {
   customer: string;
   performances: Perfomance[];
 };
+export type StatementData = {
+  customer: string;
+};
