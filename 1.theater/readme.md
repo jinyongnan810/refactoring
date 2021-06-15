@@ -41,7 +41,7 @@
 #### ポイント集計変数の削除
 
 - Step1&2: [`ループの分離`と`ステートメントのスライド`](https://github.com/jinyongnan810/refactoring/commit/9c42ffe3c614b3f78a6f1f30d5e1a4c920c32bfa#diff-dd9e87fcdc315898d854026f42e7454b873ba7446e84c7b01f534e38229ef7ae)
-- Step3&4: `関数の抽出`と`変数のインライン化`
+- Step3&4: [`関数の抽出`と`変数のインライン化`](https://github.com/jinyongnan810/refactoring/commit/44a36348a46f08608c6628c5a4ec896dd88cd747)
 - ループ分離でパフォーマンスへの影響は実際のところ要検討
 
 #### [金額修正変数の削除](https://github.com/jinyongnan810/refactoring/commit/19fd25df7e31c6bcbb742244673b31685e9095aa#diff-dd9e87fcdc315898d854026f42e7454b873ba7446e84c7b01f534e38229ef7ae)
@@ -74,4 +74,4 @@
 
 #### [ファイルを分離する](https://github.com/jinyongnan810/refactoring/commit/7095d5736b02ad306aabd42ab5235f8da8aebb80)
 
-#### 新規出力方式(HTML)を追加する
+#### [新規出力方式(HTML)を追加する](https://github.com/jinyongnan810/refactoring/commit/2e304fe867df0dd0e483a628360888d6a5c5313c)
