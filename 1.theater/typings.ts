@@ -19,8 +19,12 @@ export type Invoice = {
 };
 export type EnrichedPerformance = Perfomance & {
   play: SinglePlay;
+  amount: number;
+  volumeCredits: number;
 };
 export type StatementData = {
   customer: string;
   performances: EnrichedPerformance[];
+  totalAmount: number;
+  totalVolumeCredits: number;
 };

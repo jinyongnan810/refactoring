@@ -12,24 +12,6 @@ export const statement = (invoice: Invoice, plays: Play) => {
   const playFor = (aPerformance: Perfomance) => {
     return plays[aPerformance.playID];
   };
-  const statementData: StatementData = {
-    customer: invoice.customer,
-    performances: invoice.performances.map((aPerformance) => {
-      const result: EnrichedPerformance = {
-        ...aPerformance,
-        play: playFor(aPerformance),
-      };
-      return result;
-    }),
-  };
-  return renderPlainText(statementData, invoice, plays);
-};
-
-export const renderPlainText = (
-  data: StatementData,
-  invoice: Invoice,
-  plays: Play
-) => {
   // 金額計算ロジック
   const amountFor = (aPerformance: EnrichedPerformance) => {
     let result = 0;
@@ -62,6 +44,50 @@ export const renderPlainText = (
       result += Math.floor(aPerformance.audience / 5);
     return result;
   };
+  // 総ポイント集計
+  const totalVolumeCredits = (data: StatementData) => {
+    let result = 0;
+    for (let aPerformance of data.performances) {
+      result += aPerformance.volumeCredits;
+    }
+    return result;
+  };
+  // 総金額集計
+  const totalAmount = (data: StatementData) => {
+    let totalAmount = 0;
+    for (let perf of data.performances) {
+      // 金額加算
+      totalAmount += perf.amount;
+    }
+    return totalAmount;
+  };
+
+  const statementData: StatementData = {
+    customer: invoice.customer,
+    performances: invoice.performances.map((aPerformance) => {
+      const result: EnrichedPerformance = {
+        ...aPerformance,
+        play: playFor(aPerformance),
+        amount: 0,
+        volumeCredits: 0,
+      };
+      result.amount = amountFor(result);
+      result.volumeCredits = volumeCreditsFor(result);
+      return result;
+    }),
+    totalAmount: 0,
+    totalVolumeCredits: 0,
+  };
+  statementData.totalAmount = totalAmount(statementData);
+  statementData.totalVolumeCredits = totalVolumeCredits(statementData);
+  return renderPlainText(statementData, invoice, plays);
+};
+
+export const renderPlainText = (
+  data: StatementData,
+  invoice: Invoice,
+  plays: Play
+) => {
   // 金額フォーマットロジック
   const usd = (aAmount: number) => {
     return new Intl.NumberFormat("en-US", {
@@ -70,32 +96,15 @@ export const renderPlainText = (
       minimumFractionDigits: 2,
     }).format(aAmount / 100);
   };
-  // 総ポイント集計
-  const totalVolumeCredits = () => {
-    let result = 0;
-    for (let aPerformance of data.performances) {
-      result += volumeCreditsFor(aPerformance);
-    }
-    return result;
-  };
-  // 総金額集計
-  const totalAmount = () => {
-    let totalAmount = 0;
-    for (let perf of data.performances) {
-      let thisAmount = amountFor(perf);
-      // 注文の内訳を出力
-      result += `  ${perf.play.name}: ${usd(thisAmount)} (${
-        perf.audience
-      } seats)\n`;
-      // 金額加算
-      totalAmount += thisAmount;
-    }
-    return totalAmount;
-  };
 
   let result = `Statement for ${data.customer}\n`;
-  let amount = totalAmount();
-  result += `Amount owed is ${usd(amount)}\n`;
-  result += `You earned ${totalVolumeCredits()} credits\n`;
+  // 注文の内訳を出力
+  for (const aPerformance of data.performances) {
+    result += `  ${aPerformance.play.name}: ${usd(aPerformance.amount)} (${
+      aPerformance.audience
+    } seats)\n`;
+  }
+  result += `Amount owed is ${usd(data.totalAmount)}\n`;
+  result += `You earned ${data.totalVolumeCredits} credits\n`;
   return result;
 };
