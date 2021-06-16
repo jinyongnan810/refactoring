@@ -80,4 +80,6 @@
 
 ### 型による計算処理の再編成
 
-#### 簡易計算クラスを作成
+#### [簡易計算クラスを作成](https://github.com/jinyongnan810/refactoring/commit/403c674dffd8ac5575fe041aa18a1ccd9d8c9052)
+
+#### 計算ロジックをクラス内に移動
