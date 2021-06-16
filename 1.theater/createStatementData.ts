@@ -3,8 +3,19 @@ import {
   Invoice,
   Perfomance,
   Play,
+  SinglePlay,
   StatementData,
 } from "./typings";
+
+class PerformanceCalculator {
+  public performance: Perfomance;
+  public play: SinglePlay;
+  constructor(aPerformance: Perfomance, aPlay: SinglePlay) {
+    this.performance = aPerformance;
+    this.play = aPlay;
+  }
+}
+
 export const createStatementData = (invoice: Invoice, plays: Play) => {
   // play取得
   const playFor = (aPerformance: Perfomance) => {
@@ -60,9 +71,13 @@ export const createStatementData = (invoice: Invoice, plays: Play) => {
   const statementData: StatementData = {
     customer: invoice.customer,
     performances: invoice.performances.map((aPerformance) => {
+      const calculator = new PerformanceCalculator(
+        aPerformance,
+        playFor(aPerformance)
+      );
       const result: EnrichedPerformance = {
         ...aPerformance,
-        play: playFor(aPerformance),
+        play: calculator.play,
         amount: 0,
         volumeCredits: 0,
       };

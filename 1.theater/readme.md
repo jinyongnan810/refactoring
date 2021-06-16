@@ -75,3 +75,9 @@
 #### [ファイルを分離する](https://github.com/jinyongnan810/refactoring/commit/7095d5736b02ad306aabd42ab5235f8da8aebb80)
 
 #### [新規出力方式(HTML)を追加する](https://github.com/jinyongnan810/refactoring/commit/2e304fe867df0dd0e483a628360888d6a5c5313c)
+
+---
+
+### 型による計算処理の再編成
+
+#### 簡易計算クラスを作成
