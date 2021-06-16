@@ -48,6 +48,13 @@ class PerformanceCalculator {
   }
 }
 
+const createPerformanceCalculator = (
+  aPerformance: Perfomance,
+  aPlay: SinglePlay
+) => {
+  return new PerformanceCalculator(aPerformance, aPlay);
+};
+
 export const createStatementData = (invoice: Invoice, plays: Play) => {
   // play取得
   const playFor = (aPerformance: Perfomance) => {
@@ -71,7 +78,7 @@ export const createStatementData = (invoice: Invoice, plays: Play) => {
   const statementData: StatementData = {
     customer: invoice.customer,
     performances: invoice.performances.map((aPerformance) => {
-      const calculator = new PerformanceCalculator(
+      const calculator = createPerformanceCalculator(
         aPerformance,
         playFor(aPerformance)
       );

@@ -82,4 +82,6 @@
 
 #### [簡易計算クラスを作成](https://github.com/jinyongnan810/refactoring/commit/403c674dffd8ac5575fe041aa18a1ccd9d8c9052)
 
-#### 計算ロジックをクラス内に移動
+#### [計算ロジックをクラス内に移動](https://github.com/jinyongnan810/refactoring/commit/abddae83e7855103802bc8f176fc1a86fa456bd9)
+
+#### Factoring 関数によるコンストラクタの置き換え
