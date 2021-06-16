@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --coverage --verbose --watchAll"
+    "test": "jest --coverage --verbose --watchAll",
+    "test:ci": "jest --coverage --verbose"
   },
   "keywords": [],
   "author": "",
