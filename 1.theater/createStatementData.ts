@@ -16,43 +16,79 @@ class PerformanceCalculator {
   }
   // 金額計算ロジック
   get amount() {
-    let result = 0;
     switch (this.play.type) {
       case "tragedy":
-        result = 40000;
-        if (this.performance.audience > 30) {
-          result += 1000 * (this.performance.audience - 30);
-        }
-        break;
+        throw new Error("Not supposed to be called in here but in subclass");
       case "comedy":
-        result = 30000;
-        if (this.performance.audience > 20) {
-          result += 10000 + 500 * (this.performance.audience - 20);
-        }
-        result += 300 * this.performance.audience;
-        break;
+        throw new Error("Not supposed to be called in here but in subclass");
       default:
         throw new Error(`Unknown type:${this.play.type}`);
     }
-    return result;
+    return 0;
   }
   // Point計算ロジック
   get volumeCredit() {
     // ボリューム得点のポイントを加算
     let result = 0;
     result += Math.max(this.performance.audience - 30, 0);
-    // 喜劇のときは10人につき、さらにポイントを加算
-    if ("comedy" === this.play.type)
-      result += Math.floor(this.performance.audience / 5);
     return result;
   }
+}
+
+class ComedyPerformanceCalculator extends PerformanceCalculator {
+  constructor(aPerformance: Perfomance, aPlay: SinglePlay) {
+    super(aPerformance, aPlay);
+  }
+  // 金額計算ロジック
+  get amount() {
+    let result = 0;
+    result = 30000;
+    if (this.performance.audience > 20) {
+      result += 10000 + 500 * (this.performance.audience - 20);
+    }
+    result += 300 * this.performance.audience;
+    return result;
+  }
+  // Point計算ロジック
+  get volumeCredit() {
+    // ボリューム得点のポイントを加算
+    // super.volumeCreditを使いたいが、typescriptでは使えないらしい、強いて使っても予想外の結果になる
+    // Ref:https://stackoverflow.com/questions/50283360/typescript-error-ts2340-public-methods-accessible-via-super-keyword
+    return (
+      <PerformanceCalculator["volumeCredit"]>(
+        Reflect.get(PerformanceCalculator.prototype, "volumeCredit", this)
+      ) + Math.floor(this.performance.audience / 5)
+    );
+  }
+}
+
+class TragedyPerformanceCalculator extends PerformanceCalculator {
+  constructor(aPerformance: Perfomance, aPlay: SinglePlay) {
+    super(aPerformance, aPlay);
+  }
+  // 金額計算ロジック
+  get amount() {
+    let result = 40000;
+    if (this.performance.audience > 30) {
+      result += 1000 * (this.performance.audience - 30);
+    }
+    return result;
+  }
+  // Point計算ロジック(superと同様)
 }
 
 const createPerformanceCalculator = (
   aPerformance: Perfomance,
   aPlay: SinglePlay
 ) => {
-  return new PerformanceCalculator(aPerformance, aPlay);
+  switch (aPlay.type) {
+    case "tragedy":
+      return new TragedyPerformanceCalculator(aPerformance, aPlay);
+    case "comedy":
+      return new ComedyPerformanceCalculator(aPerformance, aPlay);
+    default:
+      throw new Error("Unrecognized type.");
+  }
 };
 
 export const createStatementData = (invoice: Invoice, plays: Play) => {

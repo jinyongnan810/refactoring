@@ -84,4 +84,6 @@
 
 #### [計算ロジックをクラス内に移動](https://github.com/jinyongnan810/refactoring/commit/abddae83e7855103802bc8f176fc1a86fa456bd9)
 
-#### Factoring 関数によるコンストラクタの置き換え
+#### [ファクトリング関数によるコンストラクタの置き換え](https://github.com/jinyongnan810/refactoring/commit/bff407c3ffb2d9133d67ec2df4c8f60c1b8aa87c)
+
+#### ポリモフィズムによる条件記述の置き換え
