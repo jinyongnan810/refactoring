@@ -1,10 +1,13 @@
 import { Invoice } from "./typings";
 
 export const printOwing = (invoice: Invoice) => {
+  const printBanner = () => {
+    console.log("**************************************");
+    console.log("**********  Customer Owes  ***********");
+    console.log("**************************************");
+  };
   let outstanding = 0;
-  console.log("**************************************");
-  console.log("**********  Customer Owes  ***********");
-  console.log("**************************************");
+  printBanner();
   // calculate outstanding
   for (const o of invoice.orders) {
     outstanding += o.amount;
