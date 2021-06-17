@@ -6,6 +6,19 @@ export const printOwing = (invoice: Invoice) => {
     console.log("**********  Customer Owes  ***********");
     console.log("**************************************");
   };
+  const printDetails = (invoice: Invoice, outstanding: number) => {
+    console.log(`name: ${invoice.customer}`);
+    console.log(`amount: ${outstanding}`);
+    console.log(`due: ${invoice.dueDate.toLocaleDateString()}`);
+  };
+  const recordDueDate = (invoice: Invoice) => {
+    const today = new Date();
+    invoice.dueDate = new Date(
+      today.getFullYear(),
+      today.getMonth(),
+      today.getDate() + 30
+    );
+  };
   let outstanding = 0;
   printBanner();
   // calculate outstanding
@@ -15,16 +28,9 @@ export const printOwing = (invoice: Invoice) => {
   invoice.outstanding = outstanding;
 
   // record due date
-  const today = new Date();
-  invoice.dueDate = new Date(
-    today.getFullYear(),
-    today.getMonth(),
-    today.getDate() + 30
-  );
-
+  recordDueDate(invoice);
   // print details
-  console.log(`name: ${invoice.customer}`);
-  console.log(`amount: ${outstanding}`);
-  console.log(`due: ${invoice.dueDate.toLocaleDateString()}`);
+  printDetails(invoice, outstanding);
+
   return invoice;
 };
