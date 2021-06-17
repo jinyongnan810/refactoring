@@ -19,13 +19,18 @@ export const printOwing = (invoice: Invoice) => {
       today.getDate() + 30
     );
   };
+  const calculateOutstanding = (invoice: Invoice) => {
+    let outstanding = 0;
+    for (const o of invoice.orders) {
+      outstanding += o.amount;
+    }
+    invoice.outstanding = outstanding;
+    return outstanding;
+  };
+
   printBanner();
   // calculate outstanding
-  let outstanding = 0;
-  for (const o of invoice.orders) {
-    outstanding += o.amount;
-  }
-  invoice.outstanding = outstanding;
+  let outstanding = calculateOutstanding(invoice);
 
   // record due date
   recordDueDate(invoice);

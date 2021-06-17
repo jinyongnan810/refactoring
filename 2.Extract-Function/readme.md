@@ -10,4 +10,5 @@
 
 ### ローカル変数の再代入
 
-- statement のスライド
+- [statement のスライド](https://github.com/jinyongnan810/refactoring/commit/929b9886a96538d1fefeac928dfe7545d7fb9d24)
+- 変数ごと抽出、抽出した関数の中で、ほかの箇所で利用している変数を返却する
