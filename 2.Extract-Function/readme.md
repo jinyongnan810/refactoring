@@ -11,4 +11,5 @@
 ### ローカル変数の再代入
 
 - [statement のスライド](https://github.com/jinyongnan810/refactoring/commit/929b9886a96538d1fefeac928dfe7545d7fb9d24)
-- 変数ごと抽出、抽出した関数の中で、ほかの箇所で利用している変数を返却する
+- [変数ごと抽出、抽出した関数の中で、ほかの箇所で利用している変数を返却する](https://github.com/jinyongnan810/refactoring/commit/a6b2f5b76408ef26b284b335c0c06ba3f22a6de9)
+- 抽出関数でコーディング規約による名称変更

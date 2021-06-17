@@ -20,17 +20,17 @@ export const printOwing = (invoice: Invoice) => {
     );
   };
   const calculateOutstanding = (invoice: Invoice) => {
-    let outstanding = 0;
+    let result = 0;
     for (const o of invoice.orders) {
-      outstanding += o.amount;
+      result += o.amount;
     }
-    invoice.outstanding = outstanding;
-    return outstanding;
+    invoice.outstanding = result;
+    return result;
   };
 
   printBanner();
   // calculate outstanding
-  let outstanding = calculateOutstanding(invoice);
+  const outstanding = calculateOutstanding(invoice);
 
   // record due date
   recordDueDate(invoice);
