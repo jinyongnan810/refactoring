@@ -6,10 +6,7 @@ export type Customer = {
 
 export const reportLines = (aCustomer: Customer) => {
   const lines: string[][] = [];
-  gatherCustomerData(lines, aCustomer);
+  lines.push(["name", aCustomer.name]);
+  lines.push(["location", aCustomer.location]);
   return lines;
-};
-const gatherCustomerData = (out: string[][], aCustomer: Customer) => {
-  out.push(["name", aCustomer.name]);
-  out.push(["location", aCustomer.location]);
 };
