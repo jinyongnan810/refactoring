@@ -5,4 +5,5 @@
 
 # 変数の抽出(p.125)
 
-- [最初の状態]()
+- [最初の状態](https://github.com/jinyongnan810/refactoring/commit/a238dbc7cc7fe5e0f5ad3aa69a586199a1358a88)
+- 変数の抽出
