@@ -6,4 +6,15 @@
 # 変数の抽出(p.125)
 
 - [最初の状態](https://github.com/jinyongnan810/refactoring/commit/a238dbc7cc7fe5e0f5ad3aa69a586199a1358a88)
-- 変数の抽出
+- [変数の抽出](https://github.com/jinyongnan810/refactoring/commit/90ea4a3e975b2612049d35edb023c0b0b45bbb02)
+
+# 変数のインライン化(p.129)
+
+- 名前が式以上のことを語らない場合、変数のインライン化を考慮する
+
+```ts
+let basePrice = anOrder.basePrice;
+return basePrice > 1000;
+->
+return anOrder.basePrice > 1000;
+```
