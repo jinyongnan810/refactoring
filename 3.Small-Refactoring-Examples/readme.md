@@ -21,4 +21,5 @@ return anOrder.basePrice > 1000;
 
 # 変数のカプセル化
 
-- 最初の状態
+- [最初の状態](https://github.com/jinyongnan810/refactoring/commit/7e10fb8e37dedec1c2770eba44e6d6794b08e256)
+- カプセル化
