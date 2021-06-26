@@ -18,3 +18,7 @@ return basePrice > 1000;
 ->
 return anOrder.basePrice > 1000;
 ```
+
+# 変数のカプセル化
+
+- 最初の状態
