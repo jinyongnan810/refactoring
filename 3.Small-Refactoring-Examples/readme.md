@@ -27,4 +27,5 @@ return anOrder.basePrice > 1000;
 # パラメータオブジェクトの導入(p.146)
 
 - [最初の状態](https://github.com/jinyongnan810/refactoring/commit/eef4985100a09e5852b951ac90fb51b7bcb07445)
-- Value Object の作成
+- [Value Object の作成](https://github.com/jinyongnan810/refactoring/commit/87a5b5f89c326bff2b62c5587f9f1f942875a3a6)
+- 機能を Value Object 内部に移動

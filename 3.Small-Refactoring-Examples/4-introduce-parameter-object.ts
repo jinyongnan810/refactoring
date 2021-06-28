@@ -21,10 +21,11 @@ export class NumberRange {
   get max() {
     return this._data.max;
   }
+  contains(val: number) {
+    return val >= this.min && val <= this.max;
+  }
 }
 
 export const readingsOutsideRange = (station: Station, range: NumberRange) => {
-  return station.readings.filter(
-    (r) => r.temp < range.min || r.temp > range.max
-  );
+  return station.readings.filter((r) => !range.contains(r.temp));
 };
