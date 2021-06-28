@@ -26,4 +26,5 @@ return anOrder.basePrice > 1000;
 
 # パラメータオブジェクトの導入(p.146)
 
-- 最初の状態
+- [最初の状態](https://github.com/jinyongnan810/refactoring/commit/eef4985100a09e5852b951ac90fb51b7bcb07445)
+- Value Object の作成

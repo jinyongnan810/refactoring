@@ -1,4 +1,5 @@
 import {
+  NumberRange,
   operatingPlan,
   readingsOutsideRange,
   Station,
@@ -16,11 +17,11 @@ describe("パラメータオブジェクトの導入", () => {
         { temp: 51, time: new Date("2016-11-10 09:50") },
       ],
     };
-    const res = readingsOutsideRange(
-      station,
+    const range = new NumberRange(
       operatingPlan.temperatureFloor,
       operatingPlan.temperatureCeiling
     );
+    const res = readingsOutsideRange(station, range);
     expect(res).toStrictEqual([
       { temp: 47, time: new Date("2016-11-10 09:10") },
       { temp: 58, time: new Date("2016-11-10 09:30") },
