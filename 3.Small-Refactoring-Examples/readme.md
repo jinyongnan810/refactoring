@@ -19,7 +19,11 @@ return basePrice > 1000;
 return anOrder.basePrice > 1000;
 ```
 
-# 変数のカプセル化
+# 変数のカプセル化(p.138)
 
 - [最初の状態](https://github.com/jinyongnan810/refactoring/commit/7e10fb8e37dedec1c2770eba44e6d6794b08e256)
-- カプセル化
+- [カプセル化](https://github.com/jinyongnan810/refactoring/commit/230df4bf528e5dc3f4984880afc5ac900784eb5b)
+
+# パラメータオブジェクトの導入(p.146)
+
+- 最初の状態
