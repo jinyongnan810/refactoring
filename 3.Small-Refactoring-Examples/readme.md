@@ -28,4 +28,8 @@ return anOrder.basePrice > 1000;
 
 - [最初の状態](https://github.com/jinyongnan810/refactoring/commit/eef4985100a09e5852b951ac90fb51b7bcb07445)
 - [Value Object の作成](https://github.com/jinyongnan810/refactoring/commit/87a5b5f89c326bff2b62c5587f9f1f942875a3a6)
-- 機能を Value Object 内部に移動
+- [機能を Value Object 内部に移動](https://github.com/jinyongnan810/refactoring/commit/7bbbcde466f385f0bb4d3904891489284171874e)
+
+# 関数群のクラスへの集約(p.151)
+
+- [最初の状態]()
