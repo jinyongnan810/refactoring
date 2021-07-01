@@ -13,34 +13,48 @@ export type PriceData = {
   quantity: number;
 };
 
+class Order {
+  private _product: Product;
+  private _quantity: number;
+  private _shippingMethod: ShippingMethod;
+  private _basePrice: number;
+  constructor(
+    product: Product,
+    quantity: number,
+    shippingMethod: ShippingMethod
+  ) {
+    this._product = product;
+    this._quantity = quantity;
+    this._shippingMethod = shippingMethod;
+    this._basePrice = product.basePrice * quantity;
+  }
+  get basePrice() {
+    return this._basePrice;
+  }
+  get discount() {
+    return (
+      Math.max(this._quantity - this._product.discountThreshold, 0) *
+      this._product.basePrice *
+      this._product.discountRate
+    );
+  }
+  get shipping() {
+    const shippingPerCase =
+      this.basePrice > this._shippingMethod.discountThreshold
+        ? this._shippingMethod.discountedFee
+        : this._shippingMethod.feePerCase;
+    return this._quantity * shippingPerCase;
+  }
+  get total() {
+    return this.basePrice - this.discount + this.shipping;
+  }
+}
+
 export const priceOrder = (
   product: Product,
   quantity: number,
   shippingMethod: ShippingMethod
 ) => {
-  const basePrice = applyBasePrice(product, quantity);
-  const discount = applyDiscount(product, quantity);
-  const shipping = applyShipping({ basePrice, quantity }, shippingMethod);
-  const price = basePrice - discount + shipping;
-  return price;
-};
-const applyBasePrice = (product: Product, quantity: number) => {
-  return product.basePrice * quantity;
-};
-const applyDiscount = (product: Product, quantity: number) => {
-  return (
-    Math.max(quantity - product.discountThreshold, 0) *
-    product.basePrice *
-    product.discountRate
-  );
-};
-const applyShipping = (
-  priceData: PriceData,
-  shippingMethod: ShippingMethod
-) => {
-  const shippingPerCase =
-    priceData.basePrice > shippingMethod.discountThreshold
-      ? shippingMethod.discountedFee
-      : shippingMethod.feePerCase;
-  return priceData.quantity * shippingPerCase;
+  const order = new Order(product, quantity, shippingMethod);
+  return order.total;
 };

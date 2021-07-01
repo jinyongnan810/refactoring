@@ -41,4 +41,5 @@ return anOrder.basePrice > 1000;
 
 - [最初の状態](https://github.com/jinyongnan810/refactoring/commit/8064f593c33fa3d03dda80c7d6ee4c190f424df6)
 - [後半 shipping 計算ロジックを抽出、それに必要なパラメータを集約](https://github.com/jinyongnan810/refactoring/commit/83fa670e5d7d3d95831a85e34cbfca66481b7347)
-- 前半価額と discount 計算ロジックも抽出
+- [前半価額と discount 計算ロジックも抽出](https://github.com/jinyongnan810/refactoring/commit/ff6b3992535bc73b4d3005e1b413b57fe6d40174)
+- [クラスへ集約]()
