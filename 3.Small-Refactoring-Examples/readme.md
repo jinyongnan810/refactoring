@@ -40,4 +40,5 @@ return anOrder.basePrice > 1000;
 # フェーズの分離(p.160)
 
 - [最初の状態](https://github.com/jinyongnan810/refactoring/commit/8064f593c33fa3d03dda80c7d6ee4c190f424df6)
-- 後半 shipping 計算ロジックを抽出、それに必要なパラメータを集約
+- [後半 shipping 計算ロジックを抽出、それに必要なパラメータを集約](https://github.com/jinyongnan810/refactoring/commit/83fa670e5d7d3d95831a85e34cbfca66481b7347)
+- 前半価額と discount 計算ロジックも抽出

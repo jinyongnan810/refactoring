@@ -18,14 +18,21 @@ export const priceOrder = (
   quantity: number,
   shippingMethod: ShippingMethod
 ) => {
-  const basePrice = product.basePrice * quantity;
-  const discount =
+  const basePrice = applyBasePrice(product, quantity);
+  const discount = applyDiscount(product, quantity);
+  const shipping = applyShipping({ basePrice, quantity }, shippingMethod);
+  const price = basePrice - discount + shipping;
+  return price;
+};
+const applyBasePrice = (product: Product, quantity: number) => {
+  return product.basePrice * quantity;
+};
+const applyDiscount = (product: Product, quantity: number) => {
+  return (
     Math.max(quantity - product.discountThreshold, 0) *
     product.basePrice *
-    product.discountRate;
-  const priceData: PriceData = { basePrice, quantity };
-  const price = basePrice - discount + applyShipping(priceData, shippingMethod);
-  return price;
+    product.discountRate
+  );
 };
 const applyShipping = (
   priceData: PriceData,
