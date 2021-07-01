@@ -33,4 +33,10 @@ return anOrder.basePrice > 1000;
 # 関数群のクラスへの集約(p.151)
 
 - [最初の状態](https://github.com/jinyongnan810/refactoring/commit/e6fb326b2c08212504e9aa95b9b869115262a64a)
-- [関数をクラスへ集約]()
+- [関数をクラスへ集約](https://github.com/jinyongnan810/refactoring/commit/36ae3b1efec5232a0ca73bd0d6c252297769647f)
+
+# <del>関数群の変換への集約(p.155)</del>
+
+# フェーズの分離(p.160)
+
+- [最初の状態]()
