@@ -8,6 +8,10 @@ export type ShippingMethod = {
   discountedFee: number;
   feePerCase: number;
 };
+export type PriceData = {
+  basePrice: number;
+  quantity: number;
+};
 
 export const priceOrder = (
   product: Product,
@@ -19,11 +23,17 @@ export const priceOrder = (
     Math.max(quantity - product.discountThreshold, 0) *
     product.basePrice *
     product.discountRate;
+  const priceData: PriceData = { basePrice, quantity };
+  const price = basePrice - discount + applyShipping(priceData, shippingMethod);
+  return price;
+};
+const applyShipping = (
+  priceData: PriceData,
+  shippingMethod: ShippingMethod
+) => {
   const shippingPerCase =
-    basePrice > shippingMethod.discountThreshold
+    priceData.basePrice > shippingMethod.discountThreshold
       ? shippingMethod.discountedFee
       : shippingMethod.feePerCase;
-  const shippingCost = quantity * shippingPerCase;
-  const price = basePrice - discount + shippingCost;
-  return price;
+  return priceData.quantity * shippingPerCase;
 };
